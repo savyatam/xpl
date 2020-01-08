@@ -10,8 +10,12 @@ app.get('/',function(req,res) {
 });*/
 app.use(express.static('frontend/build'));
 
-  app.get('/yeah', (req, res) => {
+  /*app.get('/yeah', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  });*/
+  app.get('/yeah',function(req,res) {
+    res.send('erhd');
+
   });
 http.listen(port, function(){
   console.log('listening on *:' + port);
