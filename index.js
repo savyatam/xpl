@@ -12,10 +12,13 @@ app.get('/',function(req,res) {
 const Nin=require('./models/ninjas');
 const Ninja=Nin.Ninja;
 const User=Nin.User;
-const mongoURI =
-  "mongodb+srv://shobha_99:ysav123456789@restappl-gtjru.mongodb.net/test?retryWrites=true&w=majority";
-
-const conn = mongoose.createConnection(mongoURI);
+mongoose.connect(
+    process.env.MONGODB_URL,
+  {
+   useUnifiedTopology: true,
+   useNewUrlParser: true
+  }
+);
 // Init gfs
 app.use(express.static('client/build'));
 app.get('/uses',(req,res)=>{
