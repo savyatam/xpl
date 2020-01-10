@@ -4,11 +4,6 @@ const path = require('path');
 var http = require('http').Server(app);
 var port = process.env.PORT || 3000;
 const mongoose = require('mongoose');
-/*app.use(express.static('public'));
-app.get('/',function(req,res) {
-  res.sendFile(__dirname+'/public/index.html');
-
-});*/
 const Nin=require('./models/ninjas');
 const Ninja=Nin.Ninja;
 const User=Nin.User;
@@ -19,8 +14,13 @@ mongoose.connect(
    useNewUrlParser: true
   }
 );
-// Init gfs
+mongoose.Promise = global.Promise;
 app.use(express.static('client/build'));
+app.post('/found',function(req,res){
+  Ninja.create(req.body).then(function(ninja){
+        res.send(ninja);
+      });
+});
 app.get('/uses',(req,res)=>{
   User.find().exec()
   .then(docs=>{res.send(docs);});
