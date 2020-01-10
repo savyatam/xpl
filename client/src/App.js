@@ -1,23 +1,19 @@
 import React from 'react';
-
+import Navbar from './components/Navbar'
+import { Route, BrowserRouter } from 'react-router-dom'
+import Home from './components/Home'
+import About from './components/About'
+import Yes from './components/Yes'
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+        <div className="App">
+        <Navbar/>
+        <Route exact path='/' component={Home}/>
+          <Route path='/about' component={About} />
+          <Route path='/yed' component={Yes} />
+        </div>
+      </BrowserRouter>
   );
 }
 
