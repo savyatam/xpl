@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
+import {connect} from 'react-redux'
+class Home extends Component {
 
-const Home = () => {
+  render(){
+    localStorage.token=this.props.post
+    console.log(this.props.post)
   return (
     <div>
       <div className="container">
@@ -8,7 +12,9 @@ const Home = () => {
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae repudiandae repellat illo magni eligendi cupiditate voluptates eius nam voluptate. Incidunt nihil ullam quae quia officia quaerat, deserunt eligendi explicabo totam?</p>
       </div>
     </div>
-  )
+  )}
 }
-
-export default Home
+const mapdata=(state)=>{
+  return{post:state.post}
+}
+export default connect(mapdata)(Home)

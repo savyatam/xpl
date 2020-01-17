@@ -1,0 +1,14 @@
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+
+}
+.col-md-8,
+.col-md-4 {
+padding: 1rem;
+background-color: #33b5e5;
+border: 2px solid #fff;
+color: #fff;
+text-align: center;
+}
