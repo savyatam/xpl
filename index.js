@@ -5,6 +5,7 @@ var http = require('http').Server(app);
 var port = process.env.PORT || 3000;
 const mongoose = require('mongoose');
 const Nin=require('./models/ninjas');
+const Comment=require('./models/comments');
 const Ninja=Nin.Ninja;
 const User=Nin.User;
 const bodyParser = require('body-parser');
@@ -63,9 +64,42 @@ app.post("/fixit",check,upload.single("customFile"),(req, res, err) => {
 });
 app.post('/found',urlencodedParser,function(req,res){
   console.log(req.body.user);
-  Ninja.create(req.body.user).then(function(ninja){
+  Comment.findOne({id:req.body.user.id}).exec()
+  .then(docs=>
+    {if(docs)
+      {
+        docs.comments.push(req.body.user.comments);
+        docs.save();
+        res.send(docs);
+      }
+      else {
+        const p={
+          filename:req.body.user.filename,
+          id:req.body.user.id,
+          comments:[]
+        }
+        //console.log(p);
+        p.comments.push(req.body.user.comments);
+        //console.log(p);
+        Comment.create(p);
+        res.send(p);
+      }
+    });
+  /*Comment.create(req.body.user).then(function(ninja){
         res.send(ninja);
-      });
+      });*/
+});
+app.post('/found1',urlencodedParser,function(req,res){
+  //console.log(req.body);
+  Comment.findOne({id:req.body.user._id}).exec()
+  .then(docs=>
+    {
+      if (docs) {
+      console.log('ui');
+      res.send(docs);
+      }
+      console.log('jk');
+    });
 });
 app.get('/imm',check,(req, res) => {
   console.log(req.headers.auth);
@@ -112,6 +146,11 @@ app.get('/imm/:filename', (req, res) => {
 app.get('/uses',check,(req,res)=>{
   console.log(req.headers);
   User.find().exec()
+  .then(docs=>{res.send(docs);});
+});
+app.get('/comfile',(req,res)=>{
+  console.log(req.headers);
+  Comment.find().exec()
   .then(docs=>{res.send(docs);});
 });
 app.post('/signup',urlencodedParser,(req,res)=>{

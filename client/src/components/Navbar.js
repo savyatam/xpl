@@ -10,7 +10,7 @@ const Navbar = () => {
           <li><a href='/signup'>SIGNUP</a></li>
           <li><a href='/logout'>LOGOUT</a></li>
           <li><a href='/yed'>All users</a></li>
-          <li><a href='/imgs'>View Posts</a></li>
+          <li><a href='/imgs1'>View Posts</a></li>
           <li><a href='/imageup'>ImageUpload</a></li>
         </ul>
       </div>

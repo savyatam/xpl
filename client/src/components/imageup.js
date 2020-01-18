@@ -50,7 +50,8 @@ class Upload extends Component {
             )
             .then(res => {
                 console.log(`Success` + res.data);
-                window.location.href = "/imgs";
+
+                window.location.href = "/img1";
             })
             .catch(err => {
                 console.log(err);

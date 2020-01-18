@@ -7,6 +7,8 @@ import Yes from './components/Yes'
 import Yep from './components/yep'
 import exp from './components/exp'
 import imgs from './components/imgs'
+import imgs1 from './components/com'
+import imgs2 from './components/comview'
 import Upload from './components/imageup'
 import axios from 'axios'
 import routes from './components/login'
@@ -32,6 +34,8 @@ function App() {
           <Route path='/yep' component={Yep} />
           <Route path='/exp' component={exp} />
           <Route path='/imgs' component={imgs} />
+          <Route path='/imgs1' component={imgs1} />
+          <Route path='/imgs2' component={imgs2} />
           <Route path='/imageup' component={Upload} />
           <Route path='/signup' component={routes2} />
           <Route path='/logout' component={routes3} />

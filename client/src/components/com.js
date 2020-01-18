@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
-import exp from './exp.js'
-class imgs extends Component {
+class imgs1 extends Component {
   state = {
     posts: [],
     id:"",
     comm:"",
-    com:[]
+    com:[],
+    filename:""
   }
   componentDidMount(){
     axios.get('/imm',tokenConfig())
@@ -36,41 +36,19 @@ class imgs extends Component {
        {
          console.log(e.target.value);
          this.setState({comm:e.target.value});
-         this.setState({id:post._id});
+         this.setState({id:post._id,filename:post.filename});
          console.log(post._id);
        }
-       const fnc=(ans)=>{if(ans==this.state.id)
-                        return postList1;}
        const handleSubmit=(e)=>{
          e.preventDefault();
-         const user={id:this.state.id,comments:this.state.comm};
+         const user={id:this.state.id,comments:this.state.comm,filename:this.state.filename};
          console.log(user);
          axios.post('/found',{user})
          .then(res=>{
-           this.setState({
-             com: res.data.comments,id:res.data._id
-           });
            console.log(res.data);
          });
+         window.location.href = "/imgs2";
         }
-        const posts1  = this.state.com
-        const postList2=(<div className="center">No posts to show</div>)
-        const postList1 = posts1.length ? (
-          posts1.map(post => {
-
-          //console.log(axios.defaults);
-            return (
-              <div className="post card" key={post.id}>
-                <div className="card-content">
-                  <span className="card-title">{post.title}</span>
-                  <p>comments:{post}</p>
-                </div>
-              </div>
-            )
-          })
-        ) : (
-          <div className="center">No posts to show</div>
-        );
         return (
           <div className="post card" key={post.id}>
             <img src={im} alt="" width="300" height="300"/>
@@ -82,7 +60,6 @@ class imgs extends Component {
               comment<input type='text' comment='comment' onChange={handleChange2}/></label>
               <button type='submit'>Add</button>
               </form>
-              <div>{(post._id==this.state.id)?postList1:postList2}</div>
             </div>
         )
       })
@@ -122,4 +99,4 @@ const tokenConfig = getState => {
 const mapdata=(state)=>{
   return{post:state.post}
 }
-export default connect(mapdata)(imgs)
+export default connect(mapdata)(imgs1)
